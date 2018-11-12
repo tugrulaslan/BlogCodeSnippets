@@ -1,4 +1,4 @@
-package com.tugrulaslan.datastructures;
+package com.tugrulaslan.datastructures.binarytree;
 
 public class Node {
     Node leftNode;

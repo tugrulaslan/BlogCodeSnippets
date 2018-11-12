@@ -1,7 +1,7 @@
 package com.tugrulaslan.binarytree;
 
-import com.tugrulaslan.datastructures.BinaryTree;
-import com.tugrulaslan.datastructures.Node;
+import com.tugrulaslan.datastructures.binarytree.BinaryTree;
+import com.tugrulaslan.datastructures.binarytree.Node;
 import org.junit.Before;
 import org.junit.Test;
 

@@ -1,4 +1,4 @@
-package com.tugrulaslan.datastructures;
+package com.tugrulaslan.datastructures.binarytree;
 
 import java.util.ArrayDeque;
 import java.util.Queue;
