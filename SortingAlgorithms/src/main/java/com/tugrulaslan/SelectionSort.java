@@ -28,6 +28,12 @@ public class SelectionSort {
         return unsortedArray;
     }
 
+    /**
+     * Method swaps the two elements in a given element
+     * @param unsortedArray array whose values will be swapped
+     * @param maxValueIndex index of the maximum value in the array
+     * @param minValueIndex index of the minimum value in the array
+     */
     private void swap(int[] unsortedArray, int maxValueIndex, int minValueIndex) {
         //store the max value
         int maxValueTemp = unsortedArray[maxValueIndex];
