@@ -1,4 +1,4 @@
-package com.tugrulaslan.binarytree;
+package com.tugrulaslan.datastructures.binarytree;
 
 import com.tugrulaslan.datastructures.binarytree.BinaryTree;
 import com.tugrulaslan.datastructures.binarytree.Node;
