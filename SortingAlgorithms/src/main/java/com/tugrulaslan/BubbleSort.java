@@ -1,6 +1,6 @@
 package com.tugrulaslan;
 
-public class BubbleSort {
+public class BubbleSort extends BaseSort{
     /**
      * The method sorts the given array of index in the Bubble sort fashion
      *
@@ -16,9 +16,7 @@ public class BubbleSort {
                 int curr = unsortedArray[j];
                 int next = unsortedArray[j + 1];
                 if (curr > next) {
-                    int temp = curr;
-                    unsortedArray[j] = next;
-                    unsortedArray[j + 1] = temp;
+                    swap(unsortedArray, j, j+1);
                 }
             }
         }
@@ -40,9 +38,7 @@ public class BubbleSort {
             swapped = false;
             for (int j = 1; j < arrLen - i; j++) {
                 if (unsortedArray[j - 1] > unsortedArray[j]) {
-                    int temp = unsortedArray[j - 1];
-                    unsortedArray[j - 1] = unsortedArray[j];
-                    unsortedArray[j] = temp;
+                    swap(unsortedArray, j-1, j);
                     swapped = true;
                 }
             }

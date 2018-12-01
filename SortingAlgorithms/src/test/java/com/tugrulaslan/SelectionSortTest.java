@@ -9,7 +9,6 @@ import static org.junit.Assert.assertArrayEquals;
 public class SelectionSortTest {
     private static SelectionSort selectionSort;
 
-
     @Before
     public void init() {
         selectionSort = new SelectionSort();
