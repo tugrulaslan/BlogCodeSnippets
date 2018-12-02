@@ -1,7 +1,5 @@
 package com.tugrulaslan;
 
-import java.util.Arrays;
-
 public class MergeSort extends ComparisonSort {
     /**
      * The method sorts the given array of index in the Merge sort fashion
