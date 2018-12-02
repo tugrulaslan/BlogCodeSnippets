@@ -1,6 +1,6 @@
 package com.tugrulaslan;
 
-public class BaseSort {
+public abstract class ComparisonSort {
     /**
      * Method swaps the two elements in a given element
      * @param unsortedArray array whose values will be swapped
@@ -15,4 +15,12 @@ public class BaseSort {
         //assign max temp value in min value's old position
         unsortedArray[destinationIndex] = maxValueTemp;
     }
+
+    /**
+     * The method sorts the given array of index in the Designated Sort fashion
+     *
+     * @param unsortedArray an unsorted array to be fully sorted by the method
+     * @return int[] a sorted array
+     */
+    public abstract int[] sort(int[] unsortedArray);
 }

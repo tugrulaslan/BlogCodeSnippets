@@ -1,6 +1,6 @@
 package com.tugrulaslan;
 
-public class BubbleSort extends BaseSort{
+public class BubbleSort extends ComparisonSort {
     /**
      * The method sorts the given array of index in the Bubble sort fashion
      *

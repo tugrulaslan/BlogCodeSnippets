@@ -1,8 +1,6 @@
 package com.tugrulaslan;
 
-import java.util.Arrays;
-
-public class QuickSort extends BaseSort {
+public class QuickSort extends ComparisonSort {
 
     /**
      * The method sorts the given array of index in the Quick sort fashion
@@ -21,7 +19,6 @@ public class QuickSort extends BaseSort {
      * then it swaps and partitions the arrays left and right subsets.
      *
      * @param unsortedArray an unsorted subset of array
-     * @return int[] a partitioned, sorted subset of the designated array
      */
     private void sort(int[] unsortedArray, int leftPointer, int rightPointer) {
         if (leftPointer < rightPointer + 1) {

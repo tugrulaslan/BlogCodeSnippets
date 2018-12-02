@@ -1,6 +1,6 @@
 package com.tugrulaslan;
 
-public class SelectionSort extends BaseSort{
+public class SelectionSort extends ComparisonSort {
 
     /**
      * The method sorts the given array of index in the Selection sort fashion
