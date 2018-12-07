@@ -5,10 +5,22 @@ import java.util.NoSuchElementException;
 public class Stack {
     private Node head;
 
+    /**
+     * A methods demonstrates the capacity of the stack
+     * <p>
+     *
+     * @return boolean value of the current Stack status
+     */
     public boolean isEmpty() {
         return head == null;
     }
 
+    /**
+     * Method pushes the given @param node on top of the Stack
+     * <p>
+     *
+     * @param node node that will be pushed on the top
+     */
     public void push(Node node) {
         if (head == null) {
             head = node;
@@ -21,6 +33,13 @@ public class Stack {
         }
     }
 
+    /**
+     * Method pops the element on the top fo the Stack. The element will be removed from the stack
+     * <p>
+     *
+     * @return int integer value of the popped element on top of the Stack
+     * @throws NoSuchElementException if the node is empty
+     */
     public int pop() {
         if (isEmpty()) throw new NoSuchElementException("Stack is empty");
         if (head.next == null) {
@@ -40,6 +59,13 @@ public class Stack {
         return valueToBeReturned;
     }
 
+    /**
+     * Method peeks at the element on the top fo the Stack, it does not delete the element
+     * <p>
+     *
+     * @return int integer value of the peek element on top of the Stack
+     * @throws NoSuchElementException if the node is empty
+     */
     public int peek() {
         if (isEmpty()) throw new NoSuchElementException("Stack is empty");
         return head.data;
