@@ -37,7 +37,7 @@ public class StackUnitTest {
     @Test(expected = NoSuchElementException.class)
     public void emptyStackPeekTest() {
         Stack stack = new Stack();
-        stack.peek();
+        stack.pop();
     }
 
     @Test
