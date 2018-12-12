@@ -1,13 +1,100 @@
-package com.tugrulaslan.datastructures.linkedlist;
+package com.tugrulaslan.datastructures.linkedlist.singlylinkedlist;
+
+import com.tugrulaslan.datastructures.linkedlist.LinkedList;
 
 public class SinglyLinkedList extends LinkedList {
 
+    public Node head;
 
     public SinglyLinkedList() {
     }
 
     public SinglyLinkedList(Node head) {
         this.head = head;
+    }
+
+    /**
+     * Public method checks whether the linked list containsIterativeSearch the given node
+     * The method searches the given node iteratively
+     * <p>
+     *
+     * @return boolean returns the boolean representation of the result
+     */
+    public boolean containsIterativeSearch(Node node) {
+        if (head == null || node == null) return false;
+
+        Node tempHead = head;
+        while (tempHead != null) {
+            if (tempHead.equals(node)) return true;
+            tempHead = tempHead.next;
+        }
+        return false;
+    }
+
+    /**
+     * Public method checks whether the linked list containsIterativeSearch the given node
+     * The method searches the given node recursively
+     * <p>
+     *
+     * @return boolean returns the boolean representation of the result
+     */
+    public boolean containsRecursiveSearch(Node node) {
+        if (head == null || node == null) return false;
+
+        if (head.equals(node)) {
+            return true;
+        } else {
+            head = head.next;
+            return containsRecursiveSearch(node);
+        }
+    }
+
+    /**
+     * Public method deletes the head node
+     * <p>
+     *
+     * @return Node returns the deleted head Node
+     */
+    public Node deleteFirst() {
+        //Assign the head to the temp head
+        Node tempHead = null;
+        if (!isEmpty()) {
+            tempHead = head;
+            //Make the main head temp heads next
+            //thus the main head will be null and garbage collected
+            head = head.next;
+            decreaseSize();
+        }
+        return tempHead;
+    }
+
+    /**
+     * Public method checks whether the linked list is empty or not
+     * <p>
+     *
+     * @return Node returns the added Node
+     */
+    public boolean isEmpty() {
+        return head == null;
+    }
+
+    /**
+     * Public method inserts the given node into the first place
+     * <p>
+     *
+     * @param node node to be inserted to the first place
+     * @return Node returns the added Node
+     */
+    public Node insertFirst(Node node) {
+        //makes the old head current nodes head,
+        //thus the given node will be the head
+        node.next = head;
+
+        //make the new node head
+        head = node;
+        //increase the size of the linked list
+        increaseSize();
+        return head;
     }
 
     /**
@@ -66,25 +153,6 @@ public class SinglyLinkedList extends LinkedList {
      * Public method deletes the head node
      * <p>
      *
-     * @return Node returns the deleted head Node
-     */
-    public Node deleteFirst() {
-        //Assign the head to the temp head
-        Node tempHead = null;
-        if (!isEmpty()) {
-            tempHead = head;
-            //Make the main head temp heads next
-            //thus the main head will be null and garbage collected
-            head = head.next;
-            decreaseSize();
-        }
-        return tempHead;
-    }
-
-    /**
-     * Public method deletes the head node
-     * <p>
-     *
      * @param nodeToBeDeleted the node to be deleted
      * @return Node returns the deleted head Node
      */
@@ -120,11 +188,16 @@ public class SinglyLinkedList extends LinkedList {
             // assign temp head's next to the temp head to continue the iteration
             previousNode = tempHead;
             tempHead = tempHead.next;
-            decreaseSize();
         }
         return tempHead;
     }
 
+    /**
+     * Public method deletes node in the end and returns it
+     * <p>
+     *
+     * @return Node deleted node
+     */
     public Node deleteLast() {
         //if the head is null return null
         if (isEmpty()) return null;

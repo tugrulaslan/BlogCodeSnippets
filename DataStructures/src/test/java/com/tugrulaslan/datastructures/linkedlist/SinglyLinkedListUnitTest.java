@@ -1,5 +1,7 @@
 package com.tugrulaslan.datastructures.linkedlist;
 
+import com.tugrulaslan.datastructures.linkedlist.singlylinkedlist.Node;
+import com.tugrulaslan.datastructures.linkedlist.singlylinkedlist.SinglyLinkedList;
 import org.junit.Before;
 import org.junit.Test;
 

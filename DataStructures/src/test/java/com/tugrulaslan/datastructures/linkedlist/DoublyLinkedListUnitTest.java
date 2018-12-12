@@ -1,9 +1,11 @@
 package com.tugrulaslan.datastructures.linkedlist;
 
+import com.tugrulaslan.datastructures.linkedlist.doublylinkedlist.DoublyLinkedList;
+import com.tugrulaslan.datastructures.linkedlist.doublylinkedlist.Node;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
-import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.*;
 
 public class DoublyLinkedListUnitTest {
@@ -26,207 +28,256 @@ public class DoublyLinkedListUnitTest {
         assertTrue("Linked list isn't null", globalDoublyLinkedList.isEmpty());
     }
 
+    @Ignore
     @Test
-    public void containsIterativeNullTest(){
+    public void containsIterativeNullTest() {
         DoublyLinkedList doublyLinkedList = new DoublyLinkedList();
         assertFalse("Linkedlist's the head is not null", doublyLinkedList.containsIterativeSearch(null));
-        doublyLinkedList.insertLast(new DoublyNode(1));
+        doublyLinkedList.insertLast(new Node(1));
         assertFalse("Linkedlist containsIterativeSearch the given node or the head is not null", doublyLinkedList.containsIterativeSearch(null));
     }
 
+    @Ignore
     @Test
-    public void containsIterativeTrueTest(){
+    public void containsIterativeTrueTest() {
         DoublyLinkedList doublyLinkedList = new DoublyLinkedList();
-        DoublyNode expected = new DoublyNode(1);
+        Node expected = new Node(1);
         doublyLinkedList.insertLast(expected);
         assertTrue("Linkedlist does not contain the given expected", doublyLinkedList.containsIterativeSearch(expected));
     }
 
+    @Ignore
     @Test
-    public void containsIterativeFalseTest(){
+    public void containsIterativeFalseTest() {
         DoublyLinkedList doublyLinkedList = new DoublyLinkedList();
-        DoublyNode expected = new DoublyNode(1);
+        Node expected = new Node(1);
         doublyLinkedList.insertLast(expected);
-        assertFalse("Linkedlist containsIterativeSearch the given node", doublyLinkedList.containsIterativeSearch(new DoublyNode(2)));
+        assertFalse("Linkedlist containsIterativeSearch the given node", doublyLinkedList.containsIterativeSearch(new Node(2)));
     }
+
+    @Ignore
     @Test
-    public void containsRecursiveNullTest(){
+    public void containsRecursiveNullTest() {
         DoublyLinkedList doublyLinkedList = new DoublyLinkedList();
         assertFalse("Linkedlist's the head is not null", doublyLinkedList.containsRecursiveSearch(null));
-        doublyLinkedList.insertLast(new DoublyNode(1));
+        doublyLinkedList.insertLast(new Node(1));
         assertFalse("Linkedlist containsIterativeSearch the given node or the head is not null", doublyLinkedList.containsIterativeSearch(null));
     }
 
+    @Ignore
     @Test
-    public void containsRecursiveTrueTest(){
+    public void containsRecursiveTrueTest() {
         DoublyLinkedList doublyLinkedList = new DoublyLinkedList();
-        DoublyNode expected = new DoublyNode(1);
+        Node expected = new Node(1);
         doublyLinkedList.insertLast(expected);
         assertTrue("Linkedlist does not contain the given expected", doublyLinkedList.containsRecursiveSearch(expected));
     }
 
+    @Ignore
     @Test
-    public void containsRecursiveFalseTest(){
-        SinglyLinkedList singlyLinkedList = new SinglyLinkedList();
+    public void containsRecursiveFalseTest() {
+        DoublyLinkedList doublyLinkedList = new DoublyLinkedList();
         Node node = new Node(1);
-        singlyLinkedList.insertLast(node);
-        assertFalse("Linkedlist containsIterativeSearch the given node", singlyLinkedList.containsRecursiveSearch(new Node(2)));
+        doublyLinkedList.insertLast(node);
+        assertFalse("Linkedlist containsIterativeSearch the given node", doublyLinkedList.containsRecursiveSearch(new Node(2)));
     }
 
     @Test
     public void insertFirstTest() {
         DoublyLinkedList doublyLinkedList = new DoublyLinkedList();
 
-        DoublyNode thirdNode = new DoublyNode(3);
+        Node thirdNode = new Node(3);
         doublyLinkedList.insertFirst(thirdNode);
-        assertEquals("the given node is not the third", thirdNode, doublyLinkedList.head);
+        assertEquals(thirdNode, doublyLinkedList.head);
 
-        DoublyNode secondNode = new DoublyNode(2);
+        Node secondNode = new Node(2);
         doublyLinkedList.insertFirst(secondNode);
-        assertEquals("the given node is not the second", secondNode, doublyLinkedList.head);
+        assertEquals(secondNode, doublyLinkedList.head);
 
-        DoublyNode firstNode = new DoublyNode(1);
+        Node firstNode = new Node(1);
         doublyLinkedList.insertFirst(firstNode);
-        assertEquals("the given node is not the first", firstNode, doublyLinkedList.head);
-        assertEquals("the given node is not the second", secondNode, doublyLinkedList.head.next);
-        assertEquals("the given node is not the third", thirdNode, doublyLinkedList.head.next.next);
+        assertEquals(firstNode, doublyLinkedList.head);
+        assertEquals(null, doublyLinkedList.head.previous);
+        assertEquals(secondNode, doublyLinkedList.head.next);
+
+        //second node check
+        assertEquals(firstNode, doublyLinkedList.head.next.previous);
+        assertEquals(secondNode, doublyLinkedList.head.next);
+        assertEquals(thirdNode, doublyLinkedList.head.next.next);
+
+        //third node check
+        assertEquals(secondNode, doublyLinkedList.head.next.next.previous);
+        assertEquals(thirdNode, doublyLinkedList.head.next.next);
+        assertEquals(null, doublyLinkedList.head.next.next.next);
     }
 
     @Test
     public void insertAfterTest() {
-        SinglyLinkedList singlyLinkedList = new SinglyLinkedList();
+        DoublyLinkedList doublyLinkedList = new DoublyLinkedList();
 
         Node nullNode = null;
-        Node expectedNullNode = singlyLinkedList.insertAfter(nullNode, null);
+        Node expectedNullNode = doublyLinkedList.insertAfter(nullNode, null);
         assertNull("Expected is not null", expectedNullNode);
 
         Node thirdNode = new Node(3);
-        singlyLinkedList.insertFirst(thirdNode);
-        assertEquals("the given node is not the third", thirdNode, singlyLinkedList.head);
+        doublyLinkedList.insertFirst(thirdNode);
+        assertEquals(thirdNode, doublyLinkedList.head);
 
         Node firstNode = new Node(1);
-        singlyLinkedList.insertFirst(firstNode);
-        assertEquals("the given node is not the first", firstNode, singlyLinkedList.head);
-        assertEquals("the given node is not the third", thirdNode, singlyLinkedList.head.next);
+        doublyLinkedList.insertFirst(firstNode);
+        assertEquals(firstNode, doublyLinkedList.head);
+        assertEquals(thirdNode, doublyLinkedList.head.next);
 
         Node secondNode = new Node(2);
-        singlyLinkedList.insertAfter(firstNode, secondNode);
-        assertEquals("the given node is not the first", firstNode, singlyLinkedList.head);
-        assertEquals("the given node is not the second", secondNode, singlyLinkedList.head.next);
-        assertEquals("the given node is not the third", thirdNode, singlyLinkedList.head.next.next);
+        doublyLinkedList.insertAfter(firstNode, secondNode);
+        assertEquals(firstNode, doublyLinkedList.head);
+        assertEquals(secondNode, doublyLinkedList.head.next);
+        assertEquals(thirdNode, doublyLinkedList.head.next.next);
+
+        //second node check
+        assertEquals(firstNode, doublyLinkedList.head.next.previous);
+        assertEquals(secondNode, doublyLinkedList.head.next);
+        assertEquals(thirdNode, doublyLinkedList.head.next.next);
+
+        //third node check
+        assertEquals(secondNode, doublyLinkedList.head.next.next.previous);
+        assertEquals(thirdNode, doublyLinkedList.head.next.next);
+        assertEquals(null, doublyLinkedList.head.next.next.next);
+    }
+
+    @Test
+    public void insertAfterInsertToEndTest() {
+        DoublyLinkedList doublyLinkedList = new DoublyLinkedList();
+        Node firstNode = new Node(1);
+        doublyLinkedList.insertFirst(firstNode);
+
+        Node secondNode = new Node(2);
+        doublyLinkedList.insertAfter(firstNode, secondNode);
+        assertEquals(firstNode, doublyLinkedList.head);
+        assertEquals(secondNode, doublyLinkedList.head.next);
+
+        assertNull(doublyLinkedList.head.previous);
+        assertEquals(firstNode, doublyLinkedList.head.next.previous);
+
     }
 
     @Test
     public void insertLastTest() {
-        SinglyLinkedList singlyLinkedList = new SinglyLinkedList();
+        DoublyLinkedList doublyLinkedList = new DoublyLinkedList();
 
         Node firstNode = new Node(1);
-        singlyLinkedList.insertLast(firstNode);
-        assertEquals("the given node is not the first", firstNode, singlyLinkedList.head);
+        doublyLinkedList.insertLast(firstNode);
+        assertEquals(firstNode, doublyLinkedList.head);
 
         Node secondNode = new Node(2);
-        singlyLinkedList.insertLast(secondNode);
-        assertEquals("the given node is not the second", secondNode, singlyLinkedList.head.next);
+        doublyLinkedList.insertLast(secondNode);
+        assertEquals(secondNode, doublyLinkedList.head.next);
 
         Node thirdNode = new Node(3);
-        singlyLinkedList.insertLast(thirdNode);
-        assertEquals("the given node is not the first", firstNode, singlyLinkedList.head);
-        assertEquals("the given node is not the second", secondNode, singlyLinkedList.head.next);
-        assertEquals("the given node is not the third", thirdNode, singlyLinkedList.head.next.next);
+        doublyLinkedList.insertLast(thirdNode);
+        assertEquals(firstNode, doublyLinkedList.head);
+        assertEquals(secondNode, doublyLinkedList.head.next);
+        assertEquals(thirdNode, doublyLinkedList.head.next.next);
+
+        //second node check
+        assertEquals(firstNode, doublyLinkedList.head.next.previous);
+        assertEquals(secondNode, doublyLinkedList.head.next);
+        assertEquals(thirdNode, doublyLinkedList.head.next.next);
+
+        //third node check
+        assertEquals(secondNode, doublyLinkedList.head.next.next.previous);
+        assertEquals(thirdNode, doublyLinkedList.head.next.next);
+        assertEquals(null, doublyLinkedList.head.next.next.next);
     }
 
     @Test
     public void deleteFirstTest() {
-        SinglyLinkedList singlyLinkedList = new SinglyLinkedList();
+        DoublyLinkedList doublyLinkedList = new DoublyLinkedList();
 
-        assertNull("Linked list's head is not null", singlyLinkedList.deleteFirst());
+        assertNull(doublyLinkedList.deleteFirst());
         Node firstNode = new Node(1);
-        singlyLinkedList.insertLast(firstNode);
-        assertEquals("the given node is not the first", firstNode, singlyLinkedList.head);
+        doublyLinkedList.insertLast(firstNode);
 
         Node secondNode = new Node(2);
-        singlyLinkedList.insertLast(secondNode);
-        assertEquals("the given node is not the second", secondNode, singlyLinkedList.head.next);
+        doublyLinkedList.insertLast(secondNode);
 
         Node thirdNode = new Node(3);
-        singlyLinkedList.insertLast(thirdNode);
-        assertEquals("the given node is not the first", firstNode, singlyLinkedList.head);
-        assertEquals("the given node is not the second", secondNode, singlyLinkedList.head.next);
-        assertEquals("the given node is not the third", thirdNode, singlyLinkedList.head.next.next);
+        doublyLinkedList.insertLast(thirdNode);
 
-        assertEquals("The deleted node isn't the first node", firstNode, singlyLinkedList.deleteFirst());
-        assertEquals("the first node isn't the second node", secondNode, singlyLinkedList.head);
-        assertEquals("the second node isn't the third node", thirdNode, singlyLinkedList.head.next);
+        assertEquals(firstNode, doublyLinkedList.deleteFirst());
+        assertEquals(secondNode, doublyLinkedList.head);
+        assertNull(doublyLinkedList.head.previous);
+        assertEquals(thirdNode, doublyLinkedList.head.next);
+        assertEquals(secondNode, doublyLinkedList.head.next.previous);
+        assertNull(doublyLinkedList.head.next.next);
     }
 
     @Test
     public void deleteNodeTest() {
-        SinglyLinkedList singlyLinkedList = new SinglyLinkedList();
+        DoublyLinkedList doublyLinkedList = new DoublyLinkedList();
 
-        assertNull("Linked list's head is not null", singlyLinkedList.deleteNode(null));
+        assertNull(doublyLinkedList.deleteNode(null));
         Node firstNode = new Node(1);
-        singlyLinkedList.insertLast(firstNode);
-        assertEquals("the given node is not the first", firstNode, singlyLinkedList.head);
+        doublyLinkedList.insertLast(firstNode);
 
         Node secondNode = new Node(2);
-        singlyLinkedList.insertLast(secondNode);
-        assertEquals("the given node is not the second", secondNode, singlyLinkedList.head.next);
+        doublyLinkedList.insertLast(secondNode);
 
         Node thirdNode = new Node(3);
-        singlyLinkedList.insertLast(thirdNode);
-        assertEquals("the given node is not the first", firstNode, singlyLinkedList.head);
-        assertEquals("the given node is not the second", secondNode, singlyLinkedList.head.next);
-        assertEquals("the given node is not the third", thirdNode, singlyLinkedList.head.next.next);
+        doublyLinkedList.insertLast(thirdNode);
 
-        Node deletedNode = singlyLinkedList.deleteNode(secondNode);
-        assertEquals("The deleted node isn't the second node", secondNode, deletedNode);
-        assertEquals("the first node isn't the first node", firstNode, singlyLinkedList.head);
-        assertEquals("the second node isn't the third node", thirdNode, singlyLinkedList.head.next);
-        assertNull("the third node isn't null", singlyLinkedList.head.next.next);
+        Node deletedNode = doublyLinkedList.deleteNode(secondNode);
+        assertEquals(secondNode, deletedNode);
+        assertEquals(firstNode, doublyLinkedList.head);
+        assertEquals(thirdNode, doublyLinkedList.head.next);
+        assertNull(doublyLinkedList.head.next.next);
 
-        //test last delete
-        singlyLinkedList.insertAfter(thirdNode, secondNode);
-        Node thirdNodeToBeDeleted = singlyLinkedList.deleteNode(thirdNode);
-        assertEquals("The deleted node isn't the third node", thirdNode, thirdNodeToBeDeleted);
-        assertEquals("the first node isn't the first node", firstNode, singlyLinkedList.head);
-        assertEquals("the second node isn't the second node", secondNode, singlyLinkedList.head.next);
+        //first node check
+        assertEquals(firstNode, doublyLinkedList.head);
 
+        //third node check
+        assertEquals(thirdNode, doublyLinkedList.head.next);
+        assertEquals(firstNode, doublyLinkedList.head.next.previous);
+        assertNull(doublyLinkedList.head.next.next);
+
+//        test last delete
+        doublyLinkedList.insertAfter(thirdNode, secondNode);
+        Node thirdNodeToBeDeleted = doublyLinkedList.deleteNode(thirdNode);
+        assertEquals(thirdNode, thirdNodeToBeDeleted);
+        assertEquals(firstNode, doublyLinkedList.head);
+        assertNull(doublyLinkedList.head.previous);
+        assertEquals(secondNode, doublyLinkedList.head.next);
+        assertEquals(firstNode, doublyLinkedList.head.next.previous);
     }
 
     @Test
     public void deleteLastTest() {
-        SinglyLinkedList singlyLinkedList = new SinglyLinkedList();
+        DoublyLinkedList doublyLinkedList = new DoublyLinkedList();
 
-        assertNull("Linked list's head is not null", singlyLinkedList.deleteLast());
+        assertNull(doublyLinkedList.deleteLast());
         Node firstNode = new Node(1);
-        singlyLinkedList.insertLast(firstNode);
-        assertEquals("the given node is not the first", firstNode, singlyLinkedList.head);
+        doublyLinkedList.insertLast(firstNode);
 
-        Node deletedFirstNode = singlyLinkedList.deleteLast();
-        assertEquals("The deleted node isn't the first node", firstNode, deletedFirstNode);
+        Node deletedFirstNode = doublyLinkedList.deleteLast();
+        assertEquals(firstNode, deletedFirstNode);
+        assertNull(doublyLinkedList.head);
 
-        singlyLinkedList.insertLast(firstNode);
+        doublyLinkedList.insertLast(firstNode);
 
         Node secondNode = new Node(2);
-        singlyLinkedList.insertLast(secondNode);
-        assertEquals("the given node is not the second", secondNode, singlyLinkedList.head.next);
+        doublyLinkedList.insertLast(secondNode);
 
         Node thirdNode = new Node(3);
-        singlyLinkedList.insertLast(thirdNode);
-        assertEquals("the given node is not the first", firstNode, singlyLinkedList.head);
-        assertEquals("the given node is not the second", secondNode, singlyLinkedList.head.next);
-        assertEquals("the given node is not the third", thirdNode, singlyLinkedList.head.next.next);
+        doublyLinkedList.insertLast(thirdNode);
 
-        Node deletedThirdNode = singlyLinkedList.deleteLast();
-        assertEquals("The deleted node isn't the third node", thirdNode, deletedThirdNode);
-        assertEquals("the first node isn't the first node", firstNode, singlyLinkedList.head);
-        assertEquals("the second node isn't the second node", secondNode, singlyLinkedList.head.next);
-        assertNull("the third node isn't null", singlyLinkedList.head.next.next);
+        Node deletedThirdNode = doublyLinkedList.deleteLast();
+        assertEquals(thirdNode,deletedThirdNode);
+        assertNull(doublyLinkedList.head.next.next);
 
     }
 
 
     private static void fillLinedList() {
-        globalDoublyLinkedList = new DoublyLinkedList(new DoublyNode(1));
+        globalDoublyLinkedList = new DoublyLinkedList(new Node(1));
     }
 }
