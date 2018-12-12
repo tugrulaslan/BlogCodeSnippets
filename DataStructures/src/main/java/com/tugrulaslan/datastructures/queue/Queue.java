@@ -1,16 +1,25 @@
 package com.tugrulaslan.datastructures.queue;
 
+import java.util.NoSuchElementException;
+
 public class Queue {
     private Node head;
     private Node tail;
+    private final static NoSuchElementException NO_SUCH_ELEMENT_EXCEPTION = new NoSuchElementException("Queue has no elements");
 
     public boolean isEmpty() {
-        return head == null;
+        return tail == null;
     }
 
-    public int peek() {
-        if (isEmpty()) throw new NullPointerException("Queue is null");
-        return head.getData();
+    /**
+     * Public method returns the first node in the queue
+     * <p>
+     *
+     * @throws NoSuchElementException if the queue is empty
+     */
+    public Node peek() {
+        if (isEmpty()) throw NO_SUCH_ELEMENT_EXCEPTION;
+        return head;
     }
 
     /**
@@ -20,23 +29,29 @@ public class Queue {
      * @param node node that will be enqueued
      */
     public void enqueue(Node node) {
-
+        if (isEmpty()) {
+            head = node;
+            tail = node;
+        } else {
+            tail.next = node;
+            tail = node;
+        }
     }
 
     /**
      * Public method dequeues(removes) the given node to the queue
      * <p>
      *
-     * @param node node that will be enqueued
      * @return int integer value of the dequeued element from the queue
      */
-    public int dequeue(Node node) {
-        return 0;
+    public Node dequeue() {
+        if (isEmpty()) throw NO_SUCH_ELEMENT_EXCEPTION;
+
+        Node dequeuedNode = head;
+        head = head.next;
+        if (head == null)
+            tail = null;
+        return dequeuedNode;
     }
 
-    public void add(Node node) {
-        if (tail != null) {
-            tail.next = node;
-        }
-    }
 }

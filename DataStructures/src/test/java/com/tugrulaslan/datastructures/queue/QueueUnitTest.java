@@ -1,4 +1,4 @@
-package com.tugrulaslan.datastructures.stack;
+package com.tugrulaslan.datastructures.queue;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -9,7 +9,7 @@ import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-public class StackUnitTest {
+public class QueueUnitTest {
 
     private static Node mockedNodeOne;
     private static Node mockedNodeTwo;
@@ -23,72 +23,72 @@ public class StackUnitTest {
     }
 
     @Test
-    public void emptyStackIsEmptyTest() {
-        Stack stack = new Stack();
-        assertTrue(stack.isEmpty());
+    public void emptyQueueIsEmptyTest() {
+        Queue queue = new Queue();
+        assertTrue(queue.isEmpty());
     }
 
     @Test
-    public void nonEmptyStackIsEmptyTest() {
-        Stack stack = filledStack();
-        assertFalse("Stack is empty", stack.isEmpty());
+    public void nonQueueStackIsEmptyTest() {
+        Queue queue = filledQueue();
+        assertFalse("Stack is empty", queue.isEmpty());
     }
 
     @Test(expected = NoSuchElementException.class)
-    public void emptyStackPeekTest() {
-        Stack stack = new Stack();
-        stack.pop();
+    public void emptyQueuePeekTest() {
+        Queue queue = new Queue();
+        queue.peek();
     }
 
     @Test
-    public void nonEmptyStackPeekTest() {
-        Stack stack = filledStack();
-        final int actual = stack.peek();
-        assertThat(actual).isEqualTo(mockedNodeOne.data);
+    public void nonEmptyQueuePeekTest() {
+        Queue queue = filledQueue();
+        final Node actual = queue.peek();
+        assertThat(actual).isEqualTo(mockedNodeOne);
     }
 
     @Test(expected = NoSuchElementException.class)
-    public void emptyStackPopTest() {
-        Stack stack = new Stack();
-        stack.pop();
+    public void emptyQueueDequeueTest() {
+        Queue queue = new Queue();
+        queue.dequeue();
     }
 
     @Test
-    public void popOneElementFromStackTest() {
-        Stack stack = filledStack();
-        final int actual = stack.pop();
-        assertThat(actual).isEqualTo(mockedNodeOne.data);
-        assertTrue("stack is not empty", stack.isEmpty());
+    public void dequeueOneElementFromQueueTest() {
+        Queue queue = filledQueue();
+        final Node actual = queue.dequeue();
+        assertThat(actual).isEqualTo(mockedNodeOne);
+        assertTrue("queue is not empty", queue.isEmpty());
     }
 
     @Test
-    public void popTwoElementsFromStackTest() {
-        Stack stack = filledStack();
-        stack.push(mockedNodeTwo);
-        stack.push(mockedNodeThree);
-        final int actualThirdNode = stack.pop();
-        assertThat(actualThirdNode).isEqualTo(mockedNodeThree.data);
-        final int actualSecondNode = stack.pop();
-        assertThat(actualSecondNode).isEqualTo(mockedNodeTwo.data);
-        final int actualFirstNode = stack.pop();
-        assertThat(actualFirstNode).isEqualTo(mockedNodeOne.data);
-        assertTrue("stack is not empty", stack.isEmpty());
+    public void dequeueTwoElementFromQueueTest() {
+        Queue queue = filledQueue();
+        queue.enqueue(mockedNodeTwo);
+        final Node actualFirstNode = queue.dequeue();
+        assertThat(actualFirstNode).isEqualTo(mockedNodeOne);
+        final Node actualSecondNode = queue.dequeue();
+        assertThat(actualSecondNode).isEqualTo(mockedNodeTwo);
+        assertTrue("queue is not empty", queue.isEmpty());
     }
 
     @Test
-    public void popThreeElementsFromStackTest() {
-        Stack stack = filledStack();
-        stack.push(mockedNodeTwo);
-        final int actualSecondNode = stack.pop();
-        assertThat(actualSecondNode).isEqualTo(mockedNodeTwo.data);
-        final int actualFirstNode = stack.pop();
-        assertThat(actualFirstNode).isEqualTo(mockedNodeOne.data);
-        assertTrue("stack is not empty", stack.isEmpty());
+    public void dequeueElementsFromQueueTest() {
+        Queue queue = filledQueue();
+        queue.enqueue(mockedNodeTwo);
+        queue.enqueue(mockedNodeThree);
+        final Node actualFirstNode = queue.dequeue();
+        assertThat(actualFirstNode).isEqualTo(mockedNodeOne);
+        final Node actualSecondNode = queue.dequeue();
+        assertThat(actualSecondNode).isEqualTo(mockedNodeTwo);
+        final Node actualThirdNode = queue.dequeue();
+        assertThat(actualThirdNode).isEqualTo(mockedNodeThree);
+        assertTrue("queue is not empty", queue.isEmpty());
     }
 
-    private static Stack filledStack() {
-        Stack stack = new Stack();
-        stack.push(mockedNodeOne);
-        return stack;
+    private static Queue filledQueue() {
+        Queue queue = new Queue();
+        queue.enqueue(mockedNodeOne);
+        return queue;
     }
 }
