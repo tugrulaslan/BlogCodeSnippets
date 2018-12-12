@@ -7,6 +7,12 @@ public class Queue {
     private Node tail;
     private final static NoSuchElementException NO_SUCH_ELEMENT_EXCEPTION = new NoSuchElementException("Queue has no elements");
 
+    /**
+     * Public method checks whether the queue is empty
+     * <p>
+     *
+     * @return boolean value of the queue occupation status
+     */
     public boolean isEmpty() {
         return tail == null;
     }
@@ -43,6 +49,7 @@ public class Queue {
      * <p>
      *
      * @return int integer value of the dequeued element from the queue
+     * @throws NoSuchElementException if the queue is empty
      */
     public Node dequeue() {
         if (isEmpty()) throw NO_SUCH_ELEMENT_EXCEPTION;
