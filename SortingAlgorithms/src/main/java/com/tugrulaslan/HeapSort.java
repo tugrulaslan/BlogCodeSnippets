@@ -28,11 +28,11 @@ public class HeapSort extends ComparisonSort {
         return unsortedArray;
     }
 
-    private void heapify(int arr[], int n, int rootNode) {
+    private void heapify(int arr[], int n, int index) {
         // Find largest among root, left child and right child
-        int largest = rootNode;
-        int leftNode = 2 * rootNode + 1;
-        int rightNode = 2 * rootNode + 2;
+        int largest = index;
+        int leftNode = 2 * index + 1;
+        int rightNode = 2 * index + 2;
 
         if (leftNode < n && arr[leftNode] > arr[largest])
             largest = leftNode;
@@ -41,8 +41,8 @@ public class HeapSort extends ComparisonSort {
             largest = rightNode;
 
         // Swap and continue heapifying if root is not largest
-        if (largest != rootNode) {
-            swap(arr, rootNode, largest);
+        if (largest != index) {
+            swap(arr, index, largest);
             heapify(arr, n, largest);
         }
     }
