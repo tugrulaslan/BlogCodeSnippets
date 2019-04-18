@@ -34,7 +34,7 @@ public class HostRepositoryTest {
 
     @Test
     public void shouldFindPolishHostFromSecureEuropeanHostsNonRussianRoulette(){
-        final Host host = repository.findById(3l).get();
+        final Host host = repository.findByAddress("https://ftp.icm.edu.pl/pub/Linux/fedora/linux/epel/7/x86_64/");
         assertThat(host).isNotNull();
     }
 
