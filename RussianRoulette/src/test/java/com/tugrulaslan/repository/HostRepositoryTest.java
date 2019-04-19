@@ -74,4 +74,19 @@ public class HostRepositoryTest {
         assertThat(hostNames).isNotNull();
         assertThat(hostNames).containsAnyElementsOf(expectedHosts);
     }
+
+    @Test
+    public void shouldFindAllSecureEuropeanHostsNonRussianRouletteNonStream() {
+        //given
+        ArrayList<String> expectedHosts = new ArrayList<>(Arrays.asList("https://mirror.karneval.cz/pub/linux/fedora/epel/7/x86_64/",
+                "https://ftp.icm.edu.pl/pub/Linux/fedora/linux/epel/7/x86_64/",
+                "https://ftp-stud.hs-esslingen.de/pub/epel/7/x86_64/"));
+        //when
+        final List<Host> hosts = repository.findByAddressContaining("https");
+
+        //then
+        assertThat(hosts).isNotNull();
+        assertThat(hosts).extracting("address")
+                .containsAnyElementsOf(expectedHosts);
+    }
 }
