@@ -12,4 +12,5 @@ import lombok.ToString;
 public class CertificateRequest {
     private String name;
     private String fingerprint;
+    private boolean reject;
 }

@@ -17,17 +17,18 @@ public class MainConfiguration {
 
     @Bean
     Queue queue() {
-        return new Queue(RabbitConstants.CERTIFICATE_QUEUE, RabbitConstants.DURABLE_CERTIFICATE_QUEUE);
+        return new Queue(RabbitConstants.CERTIFICATE_QUEUE, RabbitConstants.DURABLE_QUEUE);
     }
 
     @Bean
     TopicExchange exchange() {
-        return new TopicExchange(RabbitConstants.EXCHANGE);
+        return new TopicExchange(RabbitConstants.CERTIFICATE_EXCHANGE);
     }
+
 
     @Bean
     Binding binding(Queue queue, TopicExchange exchange) {
-        return BindingBuilder.bind(queue).to(exchange).with(RabbitConstants.ROUTING_KEY);
+        return BindingBuilder.bind(queue).to(exchange).with(RabbitConstants.CERTIFICATE_ROUTING_KEY);
     }
 
     @Bean
