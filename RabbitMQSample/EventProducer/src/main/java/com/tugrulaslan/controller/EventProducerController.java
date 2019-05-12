@@ -1,4 +1,4 @@
-package com.tugrulaslan.mockdata;
+package com.tugrulaslan.controller;
 
 import com.tugrulaslan.dto.CertificateRequest;
 import com.tugrulaslan.dto.CredentialRequest;

@@ -9,7 +9,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class CredentialRequest {
-    private String username;
-    private String password;
+public class CertificateRequest {
+    private String name;
+    private String fingerprint;
 }

@@ -1,0 +1,6 @@
+spring:
+  rabbitmq:
+    host: virtualcentos
+    port: 5672
+    username: guest
+    password: guest
