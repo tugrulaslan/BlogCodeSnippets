@@ -7,7 +7,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.annotation.StreamListener;
+import org.springframework.stereotype.Component;
 
+@Component
 @EnableBinding(CertificateEventStreamSource.class)
 public class CertificateOrderedListener {
     private static final Logger LOGGER = LoggerFactory.getLogger(CertificateOrderedListener.class);

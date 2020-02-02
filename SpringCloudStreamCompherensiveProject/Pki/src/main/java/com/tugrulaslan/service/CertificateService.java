@@ -31,7 +31,7 @@ public class CertificateService {
     }
 
     private void throwException(String algorithm) {
-        String message = String.format("I dont except '%s' certificates", algorithm);
+        String message = String.format("I don't accept '%s' certificates", algorithm);
         RuntimeException exception = new RuntimeException(message);
         LOGGER.error("Exception occurred ", exception);
         throw exception;
