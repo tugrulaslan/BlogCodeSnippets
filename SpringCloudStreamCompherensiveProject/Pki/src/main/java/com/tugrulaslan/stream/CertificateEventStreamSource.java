@@ -5,7 +5,7 @@ import org.springframework.messaging.SubscribableChannel;
 
 public interface CertificateEventStreamSource {
 
-    String CERTIFICATE_ORDERED_CHANNEL = "certificateOrderedChannel";
+    String CERTIFICATE_ORDERED_CHANNEL = "certificateOrderedSubscribableChannel";
     @Input(CERTIFICATE_ORDERED_CHANNEL)
     SubscribableChannel certificateOrdered();
 }

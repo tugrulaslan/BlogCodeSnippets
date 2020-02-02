@@ -1,21 +1,16 @@
 package com.tugrulaslan.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-
-import java.util.List;
+import lombok.*;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
-public final class CertificateOrdered {
-    private String orderId;
+@Builder
+public final class CertificateOrderDto {
     private String commonName;
     private String algorithm;
-    private List<String> san;
 }
+
