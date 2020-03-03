@@ -1,6 +1,6 @@
 package com.tugrulaslan.service;
 
-import com.tugrulaslan.dto.CertificateOrdered;
+import com.tugrulaslan.dto.CertificateOrderDto;
 import com.tugrulaslan.stream.CertificateEventStreamSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,12 +20,12 @@ public class CertificateService {
         this.certificateEventStreamSource = certificateEventStreamSource;
     }
 
-    public void sendCertificateOrder(CertificateOrdered certificateOrdered) {
-        LOGGER.debug("will send the Certificate Order: ", certificateOrdered);
-        Message<CertificateOrdered> certificateOrderMessage = MessageBuilder
-                .withPayload(certificateOrdered)
+    public void sendCertificateOrder(CertificateOrderDto certificateOrderDto) {
+        LOGGER.debug("will send the Certificate Order: ", certificateOrderDto);
+        Message<CertificateOrderDto> certificateOrderMessage = MessageBuilder
+                .withPayload(certificateOrderDto)
                 .build();
-        certificateEventStreamSource.certificateOrdered().send(certificateOrderMessage);
-        LOGGER.info("Sent the Certificate Order Message: ", certificateOrderMessage);
+        certificateEventStreamSource.certificateOrderedChannel().send(certificateOrderMessage);
+        LOGGER.info("Sent the Certificate Order Message: {}", certificateOrderMessage);
     }
 }

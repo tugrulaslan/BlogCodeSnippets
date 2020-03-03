@@ -1,6 +1,6 @@
 package com.tugrulaslan.controller;
 
-import com.tugrulaslan.dto.CertificateOrdered;
+import com.tugrulaslan.dto.CertificateOrderDto;
 import com.tugrulaslan.service.CertificateService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,20 +13,20 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api")
-public class CertificatesController {
-    private static final Logger LOGGER = LoggerFactory.getLogger(CertificatesController.class);
+public class CertificateController {
+    private static final Logger LOGGER = LoggerFactory.getLogger(CertificateController.class);
 
     private final CertificateService certificateService;
 
-    public CertificatesController(CertificateService certificateService) {
+    public CertificateController(CertificateService certificateService) {
         this.certificateService = certificateService;
     }
 
     @RequestMapping("/certificates")
     @ResponseBody
-    public ResponseEntity<Void> createCertificateOrder(@RequestBody CertificateOrdered certificateOrdered) {
-        LOGGER.info("Received the Certificate Order: ", certificateOrdered);
-        certificateService.sendCertificateOrder(certificateOrdered);
+    public ResponseEntity<Void> createCertificateOrder(@RequestBody CertificateOrderDto certificateOrderDto) {
+        LOGGER.info("Received the Certificate Order: {}", certificateOrderDto);
+        certificateService.sendCertificateOrder(certificateOrderDto);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
