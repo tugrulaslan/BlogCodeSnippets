@@ -25,7 +25,7 @@ public class AccountHistoryEntity {
     private Long id;
 
     @Column
-    private BigDecimal balance;
+    private BigDecimal amount;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "transaction_type")

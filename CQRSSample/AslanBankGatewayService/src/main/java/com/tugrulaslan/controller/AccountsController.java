@@ -1,6 +1,7 @@
 package com.tugrulaslan.controller;
 
 import com.tugrulaslan.dto.AccountSummaryDto;
+import com.tugrulaslan.dto.AccountSummaryWithHistoryDto;
 import com.tugrulaslan.dto.TransactionRequestDto;
 import com.tugrulaslan.service.AccountService;
 import org.springframework.validation.annotation.Validated;
@@ -11,18 +12,23 @@ import javax.validation.constraints.NotNull;
 
 @RestController
 @Validated
-public class TransactionsController {
+public class AccountsController {
 
     private final AccountService accountService;
 
-    public TransactionsController(AccountService accountService) {
+    public AccountsController(AccountService accountService) {
         this.accountService = accountService;
+    }
+
+    @GetMapping("/accounts/{id}/history")
+    @ResponseBody
+    public AccountSummaryWithHistoryDto getAccountHistoryByAccountId(@Valid @NotNull @PathVariable Long id) {
+        return accountService.retrieveById(id);
     }
 
     @PostMapping("/transactions/")
     @ResponseBody
     public AccountSummaryDto makeTransaction(@Valid @NotNull @RequestBody TransactionRequestDto transactionRequestDto) {
-        AccountSummaryDto accountSummary = accountService.update(transactionRequestDto);
-        return accountSummary;
+        return accountService.makeTransaction(transactionRequestDto);
     }
 }

@@ -6,12 +6,10 @@ import lombok.Getter;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@Getter
 @Builder
-public final class AccountTransactedDto {
-    private final Long accountId;
+@Getter
+public class AccountHistoryDto {
     private final BigDecimal amount;
-    private final BigDecimal currentBalance;
     private final TransactionType type;
-    private final LocalDateTime timestamp;
+    private LocalDateTime createdDateTime;
 }

@@ -35,13 +35,13 @@ public class AccountService {
         this.accountStream = accountStream;
     }
 
-    public AccountDto retrieveById(Long id) {
+    public AccountSummaryDto retrieveById(Long id) {
         AccountEntity accountEntity = retrieveAccount(id);
         LOGGER.info("retrieved account by id '%s'", id);
         return mapToAccountDto(accountEntity);
     }
 
-    public AccountDto create(@Valid @NotNull AccountCreationRequestDto accountDto) {
+    public AccountSummaryDto create(@Valid @NotNull AccountCreationRequestDto accountDto) {
         AccountEntity accountEntity = AccountEntity.builder()
                 .balance(accountDto.getBalance())
                 .build();
@@ -51,33 +51,34 @@ public class AccountService {
     }
 
     @Transactional
-    public AccountDto update(TransactionRequestDto transactionRequestDto) {
+    public AccountSummaryDto update(TransactionRequestDto transactionRequestDto) {
         AccountEntity account = retrieveAccount(transactionRequestDto.getAccountId());
         account = updateAccountBalance(transactionRequestDto.getAccountId(), transactionRequestDto, account);
-        sendEvent(transactionRequestDto);
+        sendEvent(transactionRequestDto, account);
         LOGGER.info("updated account, old {}, current {}", account, account);
         return mapToAccountDto(account);
     }
 
-    private void sendEvent(TransactionRequestDto transactionRequestDto) {
+    private void sendEvent(TransactionRequestDto transactionRequestDto, AccountEntity account) {
         LOGGER.info("will send event");
-        Message<AccountTransactedDto> message = prepareTransactionMessage(transactionRequestDto);
+        Message<AccountTransactedDto> message = prepareTransactionMessage(transactionRequestDto, account);
         MessageChannel messageChannel = accountStream.accountTransactedChannel();
         messageChannel.send(message);
         LOGGER.info("sent event {}", message);
     }
 
-    private Message<AccountTransactedDto> prepareTransactionMessage(TransactionRequestDto transactionRequestDto) {
+    private Message<AccountTransactedDto> prepareTransactionMessage(TransactionRequestDto transactionRequestDto, AccountEntity account) {
         return MessageBuilder
-                .withPayload(prepareTransactionDto(transactionRequestDto))
+                .withPayload(prepareTransactionDto(transactionRequestDto, account))
                 .setHeader(MessageHeaders.CONTENT_TYPE, MimeTypeUtils.APPLICATION_JSON)
                 .build();
     }
 
-    private AccountTransactedDto prepareTransactionDto(TransactionRequestDto transactionRequestDto) {
+    private AccountTransactedDto prepareTransactionDto(TransactionRequestDto transactionRequestDto, AccountEntity account) {
         return AccountTransactedDto.builder()
                 .accountId(transactionRequestDto.getAccountId())
-                .balance(transactionRequestDto.getAmount())
+                .currentBalance(account.getBalance())
+                .amount(transactionRequestDto.getAmount())
                 .type(transactionRequestDto.getType())
                 .timestamp(LocalDateTime.now())
                 .build();
@@ -89,10 +90,10 @@ public class AccountService {
                 .orElseThrow(() -> new AccountNotFoundException(exceptionMessage));
     }
 
-    private AccountDto mapToAccountDto(AccountEntity accountEntity) {
-        return AccountDto.builder()
-                .id(accountEntity.getId())
-                .balance(accountEntity.getBalance())
+    private AccountSummaryDto mapToAccountDto(AccountEntity accountEntity) {
+        return AccountSummaryDto.builder()
+                .accountId(accountEntity.getId())
+                .accountBalance(accountEntity.getBalance())
                 .build();
     }
 

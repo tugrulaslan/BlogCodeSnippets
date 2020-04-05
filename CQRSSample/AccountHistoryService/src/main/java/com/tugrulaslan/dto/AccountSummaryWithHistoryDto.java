@@ -8,7 +8,7 @@ import java.util.List;
 
 @Builder
 @Getter
-public final class AccountDto {
+public final class AccountSummaryWithHistoryDto {
     private final Long id;
     private final BigDecimal balance;
     private final List<AccountHistoryDto> history;

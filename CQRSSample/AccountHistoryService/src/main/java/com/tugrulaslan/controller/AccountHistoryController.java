@@ -1,6 +1,6 @@
 package com.tugrulaslan.controller;
 
-import com.tugrulaslan.dto.AccountDto;
+import com.tugrulaslan.dto.AccountSummaryWithHistoryDto;
 import com.tugrulaslan.service.AccountHistoryService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,7 +18,7 @@ public class AccountHistoryController {
 
     @GetMapping("/accounts/{id}/history")
     @ResponseBody
-    public AccountDto getAccountHistoryByAccountId(@PathVariable Long id) {
+    public AccountSummaryWithHistoryDto getAccountHistoryByAccountId(@PathVariable Long id) {
         return accountHistoryService.retrieveById(id);
     }
 }

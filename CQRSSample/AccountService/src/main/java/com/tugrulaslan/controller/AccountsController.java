@@ -1,7 +1,7 @@
 package com.tugrulaslan.controller;
 
 import com.tugrulaslan.dto.AccountCreationRequestDto;
-import com.tugrulaslan.dto.AccountDto;
+import com.tugrulaslan.dto.AccountSummaryDto;
 import com.tugrulaslan.service.AccountService;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -21,13 +21,13 @@ public class AccountsController {
 
     @GetMapping("/accounts/{id}")
     @ResponseBody
-    public AccountDto getAccountById(@Valid @NotNull @PathVariable Long id) {
+    public AccountSummaryDto getAccountById(@Valid @NotNull @PathVariable Long id) {
         return accountService.retrieveById(id);
     }
 
     @PostMapping("/accounts/")
     @ResponseBody
-    public AccountDto createAccount(@Valid @NotNull @RequestBody AccountCreationRequestDto requestDto) {
+    public AccountSummaryDto createAccount(@Valid @NotNull @RequestBody AccountCreationRequestDto requestDto) {
         return accountService.create(requestDto);
     }
 }

@@ -1,9 +1,8 @@
 package com.tugrulaslan.service;
 
-import com.tugrulaslan.dto.AccountDto;
 import com.tugrulaslan.dto.AccountHistoryDto;
+import com.tugrulaslan.dto.AccountSummaryWithHistoryDto;
 import com.tugrulaslan.dto.AccountTransactedDto;
-import com.tugrulaslan.dto.TransactionType;
 import com.tugrulaslan.entity.AccountEntity;
 import com.tugrulaslan.entity.AccountHistoryEntity;
 import com.tugrulaslan.exception.AccountNotFoundException;
@@ -13,7 +12,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,7 +25,7 @@ public class AccountHistoryService {
         this.accountRepository = accountRepository;
     }
 
-    public AccountDto retrieveById(Long id) {
+    public AccountSummaryWithHistoryDto retrieveById(Long id) {
         AccountEntity accountEntity = retrieveAccount(id);
         LOGGER.info("retrieved account history entity by id " + id);
         return mapToAccountDto(accountEntity);
@@ -40,13 +38,11 @@ public class AccountHistoryService {
     }
 
     private void updateAccountBalance(AccountTransactedDto transactedDto, AccountEntity account) {
-        if (transactedDto.getType().equals(TransactionType.DEPOSIT)) {
-            depositAccount(transactedDto, account);
-        } else {
-            withdrawFromAccount(transactedDto, account);
-        }
+        account.setBalance(transactedDto.getCurrentBalance());
+        LOGGER.info("new account balance {}", transactedDto.getCurrentBalance());
         addAccountHistory(transactedDto, account);
         accountRepository.save(account);
+        LOGGER.info("updated account with id ", transactedDto.getAccountId());
     }
 
     private AccountEntity retrieveAccount(Long id) {
@@ -55,8 +51,8 @@ public class AccountHistoryService {
                 .orElseThrow(() -> new AccountNotFoundException(exceptionMessage));
     }
 
-    private AccountDto mapToAccountDto(AccountEntity accountEntity) {
-        return AccountDto.builder()
+    private AccountSummaryWithHistoryDto mapToAccountDto(AccountEntity accountEntity) {
+        return AccountSummaryWithHistoryDto.builder()
                 .id(accountEntity.getId())
                 .balance(accountEntity.getBalance())
                 .history(mapToAccountHistoryList(accountEntity))
@@ -71,7 +67,7 @@ public class AccountHistoryService {
 
     private AccountHistoryDto mapToAccountHistoryDto(AccountHistoryEntity entity) {
         return AccountHistoryDto.builder()
-                .amount(entity.getBalance())
+                .amount(entity.getAmount())
                 .type(entity.getTransactionType())
                 .createdDateTime(entity.getCreatedDateTime())
                 .build();
@@ -85,25 +81,10 @@ public class AccountHistoryService {
 
     private AccountHistoryEntity prepareAccountHistoryEntity(AccountTransactedDto transactedDto, AccountEntity account) {
         AccountHistoryEntity accountHistoryEntity = new AccountHistoryEntity();
-        accountHistoryEntity.setBalance(transactedDto.getBalance());
+        accountHistoryEntity.setAmount(transactedDto.getAmount());
         accountHistoryEntity.setTransactionType(transactedDto.getType());
         accountHistoryEntity.setCreatedDateTime(transactedDto.getTimestamp());
         accountHistoryEntity.setAccount(account);
-
         return accountHistoryEntity;
-    }
-
-    private void depositAccount(AccountTransactedDto transactedDto, AccountEntity account) {
-        BigDecimal newBalance = account.getBalance()
-                .add(transactedDto.getBalance());
-        account.setBalance(newBalance);
-        LOGGER.info("deposited account with {} from the account {}", account, newBalance);
-    }
-
-    private void withdrawFromAccount(AccountTransactedDto transactedDto, AccountEntity account) {
-        BigDecimal newAccountBalance = account.getBalance()
-                .subtract(transactedDto.getBalance());
-        account.setBalance(newAccountBalance);
-        LOGGER.info("withdrawn {} from the account {} new balance is {}", transactedDto.getBalance(), account, newAccountBalance);
     }
 }

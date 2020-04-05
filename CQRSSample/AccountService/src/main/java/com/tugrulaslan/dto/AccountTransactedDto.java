@@ -10,7 +10,8 @@ import java.time.LocalDateTime;
 @Builder
 public final class AccountTransactedDto {
     private final Long accountId;
-    private final BigDecimal balance;
+    private final BigDecimal amount;
+    private final BigDecimal currentBalance;
     private final TransactionType type;
     private final LocalDateTime timestamp;
 }
