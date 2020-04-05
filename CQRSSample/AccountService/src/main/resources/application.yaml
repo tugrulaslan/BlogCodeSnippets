@@ -1,0 +1,18 @@
+server:
+  port: 7000
+spring:
+  datasource:
+    initialization-mode: always
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: none
+  cloud:
+    stream:
+      kafka:
+        binder:
+          brokers: localhost:9092
+      bindings:
+        accountTransactedChannel:
+          destination: account
+          contentType: application/json

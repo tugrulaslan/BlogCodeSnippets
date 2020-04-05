@@ -1,0 +1,5 @@
+CREATE TABLE account
+(
+    id      INT AUTO_INCREMENT PRIMARY KEY,
+    balance DOUBLE NOT NULL
+);
