@@ -1,0 +1,15 @@
+====RUN REDIS ON DOCKER====
+sudo docker run -d -p 6379:6379 --name my-docker-redis redis
+
+====URLS====
+CREATION:
+curl -X POST http://localhost:8080/api/students/tugrul
+
+RETRIEVE BY ID:
+curl http://localhost:8080/api/students/ID_GOES_HERE
+
+DELETION:
+curl -X DELETE http://localhost:8080/api/students/ID_GOES_HERE
+
+RETRIEVE ALL:
+curl http://localhost:8080/api/students/
