@@ -1,6 +1,6 @@
 package com.tugrulaslan.controller;
 
-import com.tugrulaslan.XssSanitizerService;
+import com.tugrulaslan.service.XssSanitizerService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

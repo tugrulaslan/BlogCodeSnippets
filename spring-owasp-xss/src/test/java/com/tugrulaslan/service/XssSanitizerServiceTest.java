@@ -1,5 +1,4 @@
-package com.tugrulaslan;
-
+package com.tugrulaslan.service;
 
 import org.junit.Test;
 

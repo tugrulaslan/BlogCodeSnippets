@@ -1,4 +1,4 @@
-package com.tugrulaslan;
+package com.tugrulaslan.service;
 
 import org.owasp.html.HtmlPolicyBuilder;
 import org.owasp.html.PolicyFactory;
