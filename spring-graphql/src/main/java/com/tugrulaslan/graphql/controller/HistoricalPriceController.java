@@ -20,11 +20,11 @@ import java.net.URI;
 import java.time.Duration;
 
 @Controller
-public class HistoricPriceController {
+public class HistoricalPriceController {
 
     private final HistoricalPriceRepository repository;
 
-    public HistoricPriceController(HistoricalPriceRepository repository) {
+    public HistoricalPriceController(HistoricalPriceRepository repository) {
         this.repository = repository;
     }
 
