@@ -1,0 +1,20 @@
+type Query {
+    historicalPrices: [HistoricalPrice]
+    historicalPricesBySymbol(symbol: String): [HistoricalPrice]
+}
+
+type Mutation {
+    addHistoricalPrice(symbol: String, time: Int, price: Float, volume: Float): HistoricalPrice
+}
+
+type Subscription{
+    lastTradingPrice: String
+}
+
+type HistoricalPrice {
+    id: ID
+    symbol: String
+    time: Int
+    price: Float
+    volume: Float
+}

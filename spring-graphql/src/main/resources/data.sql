@@ -1,0 +1,9 @@
+INSERT INTO historical_price (id, symbol, time, price, volume) VALUES (1,'BTC-USDT',1651881600,36129.02,713980596.97);
+INSERT INTO historical_price (id, symbol, time, price, volume) VALUES (2,'BTC-USDT',1651968000,35503.12,1413921299.77);
+INSERT INTO historical_price (id, symbol, time, price, volume) VALUES (3,'BTC-USDT',1652054400,34229.57,440166110.12);
+INSERT INTO historical_price (id, symbol, time, price, volume) VALUES (4,'ETH-USDT',1651881600,2703.39,359893218.95);
+INSERT INTO historical_price (id, symbol, time, price, volume) VALUES (5,'ETH-USDT',1651968000,2641.2,692511713.12);
+INSERT INTO historical_price (id, symbol, time, price, volume) VALUES (6,'ETH-USDT',1652054400,2529.04,328027181.44);
+INSERT INTO historical_price (id, symbol, time, price, volume) VALUES (7,'ADA-USDT',1651881600,0.7857,41361853.89);
+INSERT INTO historical_price (id, symbol, time, price, volume) VALUES (8,'ADA-USDT',1651968000,0.7657,63993950.01);
+INSERT INTO historical_price (id, symbol, time, price, volume) VALUES (9,'ADA-USDT',1652054400,0.7537,40638429.61);
